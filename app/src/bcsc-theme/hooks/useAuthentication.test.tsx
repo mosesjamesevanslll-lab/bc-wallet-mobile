@@ -1,5 +1,6 @@
 import { BCSCScreens } from '@/bcsc-theme/types/navigators'
-import { renderHook, act } from '@testing-library/react-native'
+import * as Bifold from '@bifold/core'
+import { act, renderHook } from '@testing-library/react-native'
 import {
   AccountSecurityMethod,
   canPerformDeviceAuthentication,
@@ -7,10 +8,9 @@ import {
   isAccountLocked,
   unlockWithDeviceSecurity,
 } from 'react-native-bcsc-core'
-import * as useSecureActionsModule from './useSecureActions'
 import * as BCSCLoadingContext from '../contexts/BCSCLoadingContext'
-import * as Bifold from '@bifold/core'
 import { useAuthentication } from './useAuthentication'
+import * as useSecureActionsModule from './useSecureActions'
 
 jest.mock('react-native-bcsc-core', () => ({
   AccountSecurityMethod: {

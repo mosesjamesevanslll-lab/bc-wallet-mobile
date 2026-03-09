@@ -31,7 +31,6 @@ const AccountSelectorScreen = ({ navigation }: AccountSelectorScreenProps) => {
     async (nickname: string) => {
       dispatch({ type: BCDispatchAction.SELECT_ACCOUNT, payload: [nickname] })
       await authentication.unlockApp()
-      // navigation.navigate(BCSCScreens.EnterPIN)
     },
     [authentication, dispatch]
   )
