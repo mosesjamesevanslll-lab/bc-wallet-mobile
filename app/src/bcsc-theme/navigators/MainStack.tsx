@@ -12,7 +12,7 @@ import { createHeaderWithoutBanner } from '../components/HeaderWithBanner'
 import { createMainHelpHeaderButton } from '../components/HelpHeaderButton'
 import { createMainWebviewHeaderBackButton } from '../components/WebViewBackButton'
 import { BCSCAccountContext } from '../contexts/BCSCAccountContext'
-import { LoadingScreen } from '../contexts/BCSCLoadingContext'
+import { useLoadingScreen } from '../contexts/BCSCLoadingContext'
 import { useBCSCStack } from '../contexts/BCSCStackContext'
 import TransferQRDisplayScreen from '../features/account-transfer/transferer/TransferQRDisplayScreen'
 import TransferQRInformationScreen from '../features/account-transfer/transferer/TransferQRInformationScreen'
@@ -80,6 +80,7 @@ const MainStack: React.FC = () => {
   const initialRouteName = pairingInitialParams ? BCSCScreens.ServiceLogin : BCSCStacks.Tab
   useSystemChecks(SystemCheckScope.MAIN_STACK)
   useBCSCStack(BCSCStacks.Main)
+  const loadingScreen = useLoadingScreen()
 
   useEffect(() => {
     const unsubscribe = pairingService.onNavigationRequest(({ screen, params }) => {
@@ -102,11 +103,7 @@ const MainStack: React.FC = () => {
         routes: [{ name: BCSCScreens.AccountExpired }],
       })
     )
-  }, [context?.account, navigation])
-
-  if (!context || context.isLoadingAccount || !context.account) {
-    return <LoadingScreen />
-  }
+  }, [context?.account, loadingScreen, navigation])
 
   return (
     <View style={{ flex: 1 }} importantForAccessibility={hideElements}>

@@ -76,7 +76,7 @@ const BCSCRootStack: React.FC = () => {
     return <OnboardingStack />
   }
 
-  if (!store.authentication.didAuthenticate) {
+  if (!store.authentication.didAuthenticate || !store.bcscSecure.isHydrated) {
     return <AuthStack />
   }
 
